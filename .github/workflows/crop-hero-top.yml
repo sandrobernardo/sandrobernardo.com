@@ -1,0 +1,38 @@
+name: Ajustar corte da foto de capa
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  crop-hero:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ajustar enquadramento da capa
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = ".hero-photo{position:absolute;inset:0}"
+          new = ".hero-photo{position:absolute;inset:0}.hero-photo img{object-position:center 56%;transform:scale(1.08)}"
+          if old in s and '.hero-photo img{object-position:' not in s:
+              s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Guardar alteração
+        run: |
+          if git diff --quiet; then
+            echo 'Sem alterações.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Ajustar corte superior da foto de capa'
+          git push
