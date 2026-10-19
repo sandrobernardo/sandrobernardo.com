@@ -37,3 +37,4 @@ jobs:
           git add index.html
           git commit -m 'Usar foto de Sandro na capa'
           git push
+# trigger
