@@ -51,6 +51,28 @@ nav{position:absolute;z-index:10;top:0;left:0;width:100%;display:flex;align-item
 
 /* Destaque dos números nas secções claras */
 
+
+/* Player flutuante do podcast — exclusivo da página inicial */
+.fv-player{position:fixed;right:24px;bottom:22px;z-index:1000;width:min(340px,calc(100vw - 32px));font-family:'DM Sans',sans-serif;color:var(--black)}
+.fv-toggle{width:100%;display:flex;align-items:center;gap:12px;padding:10px 13px;background:var(--white);border:1px solid rgba(7,16,20,.12);border-radius:16px;box-shadow:0 10px 35px rgba(7,16,20,.2);text-align:left;cursor:pointer;color:var(--black)}
+.fv-art{width:48px;height:48px;flex:0 0 48px;border-radius:9px;background:var(--black);color:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:15px;line-height:.9;text-align:center;letter-spacing:.3px}
+.fv-copy{min-width:0;flex:1}
+.fv-kicker{display:block;font-size:9px;line-height:1.2;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:#687074;margin-bottom:4px}
+.fv-name{display:block;font-size:14px;line-height:1.2;font-weight:800}
+.fv-sub{display:block;font-size:10px;line-height:1.3;color:#687074;margin-top:3px}
+.fv-play{width:36px;height:36px;flex:0 0 36px;border:0;border-radius:50%;background:var(--lime);color:var(--black);display:grid;place-items:center}
+.fv-play svg,.fv-chevron svg{width:16px;height:16px;display:block}
+.fv-chevron{width:20px;height:20px;display:grid;place-items:center;color:#596167;transition:transform .2s ease}
+.fv-player.is-open .fv-chevron{transform:rotate(180deg)}
+.fv-panel{display:none;margin-bottom:9px;padding:10px;background:var(--white);border:1px solid rgba(7,16,20,.12);border-radius:16px;box-shadow:0 10px 35px rgba(7,16,20,.2)}
+.fv-player.is-open .fv-panel{display:block}
+.fv-panel iframe{display:block;width:100%;height:152px;border:0;border-radius:12px}
+.fv-links{display:flex;justify-content:space-between;gap:12px;padding:9px 2px 1px;font-size:10px;font-weight:800;text-transform:uppercase}
+.fv-links a{border-bottom:1px solid var(--lime);padding-bottom:2px}
+.fv-toggle:focus-visible,.fv-links a:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+@media(max-width:520px){.fv-player{right:12px;bottom:12px;width:min(320px,calc(100vw - 24px))}.fv-toggle{padding:9px 11px}.fv-art{width:43px;height:43px;flex-basis:43px}}
+@media(prefers-reduced-motion:reduce){.fv-chevron{transition:none}}
+
 </style></head>
 <body>
 
@@ -72,4 +94,47 @@ nav{position:absolute;z-index:10;top:0;left:0;width:100%;display:flex;align-item
 <a href="https://instagram.com/sandrobernardo" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
 <a href="https://youtube.com/@sandrobernardoofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg></a>
 <a href="https://linkedin.com/in/sandrobernardo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 2H3.55C2.7 2 2 2.67 2 3.5v17c0 .83.7 1.5 1.55 1.5h16.9c.86 0 1.55-.67 1.55-1.5v-17c0-.83-.69-1.5-1.55-1.5ZM7.93 18.75H4.96V9.2h2.97v9.55ZM6.45 7.9a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.3 10.85h-2.96V14.1c0-1.1-.02-2.52-1.54-2.52-1.54 0-1.78 1.2-1.78 2.44v4.73H9.5V9.2h2.84v1.3h.04c.4-.75 1.36-1.54 2.8-1.54 3 0 3.57 1.97 3.57 4.53v5.26Z"/></svg></a></div></footer>
+
+<aside class="fv-player" id="fui-voltei-player" aria-label="Leitor do podcast Fui e Voltei">
+  <div class="fv-panel" id="fv-panel" aria-hidden="true">
+    <iframe id="fv-spotify" title="Ouvir Fui e Voltei no Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="fv-links">
+      <a href="https://podcasts.apple.com/pt/podcast/fui-e-voltei/id1884646905" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+      <a href="https://rds.pt/podcasts/fui-e-voltei/" target="_blank" rel="noopener noreferrer">Página RDS</a>
+    </div>
+  </div>
+  <button class="fv-toggle" id="fv-toggle" type="button" aria-expanded="false" aria-controls="fv-panel">
+    <span class="fv-art" aria-hidden="true">FUI<br>&amp; VOLTEI</span>
+    <span class="fv-copy">
+      <span class="fv-kicker">Podcast de viagens</span>
+      <span class="fv-name">Fui e Voltei</span>
+      <span class="fv-sub">Com Sandro Bernardo</span>
+    </span>
+    <span class="fv-play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.8c0-.8.9-1.3 1.6-.9l10 6.2a1 1 0 0 1 0 1.7l-10 6.2c-.7.4-1.6-.1-1.6-.9V5.8Z"/></svg>
+    </span>
+    <span class="fv-chevron" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+  </button>
+</aside>
+<script>
+(function(){
+  var player=document.getElementById('fui-voltei-player');
+  var toggle=document.getElementById('fv-toggle');
+  var panel=document.getElementById('fv-panel');
+  var frame=document.getElementById('fv-spotify');
+  if(!player||!toggle||!panel||!frame)return;
+  toggle.addEventListener('click',function(){
+    var opening=!player.classList.contains('is-open');
+    player.classList.toggle('is-open',opening);
+    toggle.setAttribute('aria-expanded',String(opening));
+    panel.setAttribute('aria-hidden',String(!opening));
+    if(opening&&!frame.src){
+      frame.src='https://open.spotify.com/embed/show/4lybxKTiEmn5DM5dwaRDVI?utm_source=generator&theme=0';
+    }
+  });
+})();
+</script>
+
 </body></html>
